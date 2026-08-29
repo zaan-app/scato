@@ -3,7 +3,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/scato.svg)](https://pypi.org/project/scato/)
 [![Python versions](https://img.shields.io/pypi/pyversions/scato.svg)](https://pypi.org/project/scato/)
 [![MPL 2.0 license](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
-[![CI](https://github.com/ameerfayiz/socialscan-ng/actions/workflows/ci.yml/badge.svg)](https://github.com/ameerfayiz/socialscan-ng/actions/workflows/ci.yml)
+[![CI](https://github.com/ameerfayiz/scato/actions/workflows/ci.yml/badge.svg)](https://github.com/ameerfayiz/scato/actions/workflows/ci.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 **scato** offers accurate and fast checks for email address and username usage on online platforms.
@@ -50,8 +50,8 @@ Given an email address or username, it tells you whether it is **available**, **
 
 ### Install from source
 ```
-> git clone https://github.com/ameerfayiz/socialscan-ng.git
-> cd socialscan-ng
+> git clone https://github.com/ameerfayiz/scato.git
+> cd scato
 > pip install .
 ```
 
@@ -199,7 +199,7 @@ Also in this release:
 - Rate limiting and blocking are reported distinctly from wrong answers.
 - Added request timeouts, and widened error handling to cover timeouts and malformed responses.
 - Fixed the licence declared in package metadata, which said MIT while the project is MPL-2.0.
-- Dropped Python 3.6/3.7 support; the minimum is now 3.8.
+- Dropped Python 3.6/3.7/3.8 support (all end-of-life); the minimum is now 3.9.
 
 ## Development
 
@@ -213,7 +213,7 @@ The live tests query real platforms. When a platform blocks or throttles the run
 
 ## Contributing
 
-Errors, suggestions, or want a platform added? [Submit an issue](https://github.com/ameerfayiz/socialscan-ng/issues). PRs are welcome.
+Errors, suggestions, or want a platform added? [Submit an issue](https://github.com/ameerfayiz/scato/issues). PRs are welcome.
 
 ## Credits
 

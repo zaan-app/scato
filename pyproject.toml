@@ -7,7 +7,7 @@ name = "scato"
 dynamic = ["version"]
 description = "Check email address and username usage on online platforms - a maintained fork of socialscan"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = "MPL-2.0"
 license-files = ["LICENSE"]
 authors = [{ name = "Isaac Ong", email = "isaacong.jw@gmail.com" }]
@@ -29,7 +29,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: Information Technology",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -51,9 +50,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ameerfayiz/socialscan-ng"
-Repository = "https://github.com/ameerfayiz/socialscan-ng"
-Issues = "https://github.com/ameerfayiz/socialscan-ng/issues"
+Homepage = "https://github.com/ameerfayiz/scato"
+Repository = "https://github.com/ameerfayiz/scato"
+Issues = "https://github.com/ameerfayiz/scato/issues"
 "Upstream (archived)" = "https://github.com/iojw/socialscan"
 
 [project.scripts]

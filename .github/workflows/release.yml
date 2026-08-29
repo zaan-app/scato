@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    # The environment and id-token permission are what PyPI's trusted publisher
+    # matches against; the publisher must be registered before the first tag.
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      # A version can never be re-uploaded to PyPI, so refuse a tag that does not
+      # match the version the build would actually carry.
+      - name: Check tag matches package version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version=$(python -c "import scato; print(scato.__version__)")
+          if [ "$tag" != "$version" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match scato.__version__ ($version)" >&2
+            exit 1
+          fi
+      - name: Build
+        run: |
+          pip install build
+          python -m build
+      - uses: pypa/gh-action-pypi-publish@release/v1
