@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install -e ".[dev]"
+      - name: Lint
+        run: |
+          black --check socialscan tests
+          flake8 socialscan tests
+      # The live-platform tests are excluded here: they query third-party sign-up
+      # endpoints, which rate limit CI runners by IP. Run them locally with
+      # `pytest -m network`.
+      - name: Test
+        run: pytest -v -m "not network"

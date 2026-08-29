@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+socialscan-ng = {editable = true, path = "."}
+
+[dev-packages]
+socialscan-ng = {editable = true, path = ".", extras = ["dev"]}
+tox = "*"
+
+[requires]
+python_version = "3.11"

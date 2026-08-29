@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "socialscan-ng"
+dynamic = ["version"]
+description = "Check email address and username usage on online platforms - a maintained fork of socialscan"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MPL-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Isaac Ong", email = "isaacong.jw@gmail.com" }]
+maintainers = [
+    { name = "Ameer Fayiz", email = "41417646+ameerfayiz@users.noreply.github.com" },
+]
+keywords = [
+    "email",
+    "email-checker",
+    "username",
+    "username-checker",
+    "social-media",
+    "osint",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Utilities",
+]
+dependencies = ["colorama", "aiohttp>=3.5.0", "tqdm>=4.31.0"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-timeout",
+    "pytest-xdist",
+    "pytest-rerunfailures",
+    "black==23.12.1",
+    "flake8",
+]
+
+[project.urls]
+Homepage = "https://github.com/ameerfayiz/socialscan-ng"
+Repository = "https://github.com/ameerfayiz/socialscan-ng"
+Issues = "https://github.com/ameerfayiz/socialscan-ng/issues"
+"Upstream (archived)" = "https://github.com/iojw/socialscan"
+
+# Both names run the same CLI: socialscan keeps drop-in compatibility with the original,
+# socialscan-ng matches the distribution name.
+[project.scripts]
+socialscan = "socialscan.__main__:main"
+socialscan-ng = "socialscan.__main__:main"
+
+[tool.setuptools]
+packages = ["socialscan"]
+
+[tool.setuptools.dynamic]
+version = { attr = "socialscan.__version__" }
+
+[tool.black]
+line-length = 100
+
+[tool.pytest.ini_options]
+markers = [
+    "network: sends live queries to third-party platforms; results depend on those platforms being reachable and not throttling the caller",
+]
