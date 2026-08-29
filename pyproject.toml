@@ -50,9 +50,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ameerfayiz/scato"
-Repository = "https://github.com/ameerfayiz/scato"
-Issues = "https://github.com/ameerfayiz/scato/issues"
+Homepage = "https://github.com/zaan-app/scato"
+Repository = "https://github.com/zaan-app/scato"
+Issues = "https://github.com/zaan-app/scato/issues"
 "Upstream (archived)" = "https://github.com/iojw/socialscan"
 
 [project.scripts]
