@@ -3,7 +3,7 @@ requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "socialscan-ng"
+name = "scato"
 dynamic = ["version"]
 description = "Check email address and username usage on online platforms - a maintained fork of socialscan"
 readme = "README.md"
@@ -56,17 +56,14 @@ Repository = "https://github.com/ameerfayiz/socialscan-ng"
 Issues = "https://github.com/ameerfayiz/socialscan-ng/issues"
 "Upstream (archived)" = "https://github.com/iojw/socialscan"
 
-# Both names run the same CLI: socialscan keeps drop-in compatibility with the original,
-# socialscan-ng matches the distribution name.
 [project.scripts]
-socialscan = "socialscan.__main__:main"
-socialscan-ng = "socialscan.__main__:main"
+scato = "scato.__main__:main"
 
 [tool.setuptools]
-packages = ["socialscan"]
+packages = ["scato"]
 
 [tool.setuptools.dynamic]
-version = { attr = "socialscan.__version__" }
+version = { attr = "scato.__version__" }
 
 [tool.black]
 line-length = 100

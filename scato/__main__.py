@@ -5,7 +5,7 @@
 import asyncio
 import sys
 
-from socialscan import cli
+from scato import cli
 
 
 def main():

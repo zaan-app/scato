@@ -17,9 +17,9 @@ import colorama
 import tqdm
 from colorama import Fore, Style
 
-from socialscan import __version__
-from socialscan.platforms import PlatformResponse, Platforms
-from socialscan.util import init_checkers, init_prerequest, query
+from scato import __version__
+from scato.platforms import PlatformResponse, Platforms
+from scato.util import init_checkers, init_prerequest, query
 
 BAR_WIDTH = 50
 BAR_FORMAT = "{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed_s:.2f}s]"

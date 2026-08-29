@@ -11,7 +11,7 @@ from enum import Enum
 
 import aiohttp
 
-from socialscan import __version__
+from scato import __version__
 
 
 class QueryError(Exception):
@@ -475,7 +475,7 @@ class Lastfm(BasePlatform, UsernameQueryable, PrerequestRequired):
     USERNAME_TAKEN_MSGS = ["Sorry, this username isn't available."]
     USERNAME_LINK_FORMAT = "https://www.last.fm/user/{}"
     # Last.fm rate limits browser user agents hard enough to answer 406 to the join page
-    HEADERS = {"User-agent": f"socialscan/{__version__}"}
+    HEADERS = {"User-agent": f"scato/{__version__}"}
 
     tag_regex = re.compile(r"<[^>]+>")
 
@@ -575,7 +575,7 @@ class Firefox(BasePlatform, EmailQueryable):
     URL = "https://accounts.firefox.com/signup"
     EMAIL_ENDPOINT = "https://api.accounts.firefox.com/v1/account/status"
     # The cache in front of the API answers 406 to any request carrying a browser user agent
-    HEADERS = {"User-agent": f"socialscan/{__version__}"}
+    HEADERS = {"User-agent": f"scato/{__version__}"}
 
     async def check_email(self, email):
         async with self.post(Firefox.EMAIL_ENDPOINT, json={"email": email}) as r:

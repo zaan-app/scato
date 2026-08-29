@@ -1,12 +1,12 @@
-# socialscan-ng
+# scato
 
-[![PyPI version](https://img.shields.io/pypi/v/socialscan-ng.svg)](https://pypi.org/project/socialscan-ng/)
-[![Python versions](https://img.shields.io/pypi/pyversions/socialscan-ng.svg)](https://pypi.org/project/socialscan-ng/)
+[![PyPI version](https://img.shields.io/pypi/v/scato.svg)](https://pypi.org/project/scato/)
+[![Python versions](https://img.shields.io/pypi/pyversions/scato.svg)](https://pypi.org/project/scato/)
 [![MPL 2.0 license](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
 [![CI](https://github.com/ameerfayiz/socialscan-ng/actions/workflows/ci.yml/badge.svg)](https://github.com/ameerfayiz/socialscan-ng/actions/workflows/ci.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-**socialscan-ng** offers accurate and fast checks for email address and username usage on online platforms.
+**scato** offers accurate and fast checks for email address and username usage on online platforms.
 
 Given an email address or username, it tells you whether it is **available**, **taken** or **invalid** on a range of online platforms.
 
@@ -16,11 +16,11 @@ Given an email address or username, it tells you whether it is **available**, **
 >
 > This fork repairs those checks, replaces the ones that could not be repaired, and drops the ones the platforms no longer expose at all. See [What changed in this fork](#what-changed-in-this-fork).
 >
-> The import name is still `socialscan`, so existing code keeps working — only the install name changes. **Uninstall the original first** (`pip uninstall socialscan`), as the two packages install to the same module path.
+> The import name is `scato`, not `socialscan`, so calls into the library need updating: `from socialscan.util import ...` becomes `from scato.util import ...`. In exchange, nothing collides with the original package any more — the two can be installed side by side.
 
 ## Features
 
-1. **Accuracy**: socialscan-ng queries the platforms' registration endpoints directly, retrieving the appropriate CSRF tokens, headers and cookies. This avoids the false positives and negatives that come from guessing at profile pages. See [Accuracy](#accuracy) for the two platforms where this is no longer possible.
+1. **Accuracy**: scato queries the platforms' registration endpoints directly, retrieving the appropriate CSRF tokens, headers and cookies. This avoids the false positives and negatives that come from guessing at profile pages. See [Accuracy](#accuracy) for the two platforms where this is no longer possible.
 
 2. **Speed**: all queries run concurrently with [asyncio](https://docs.python.org/3/library/asyncio.html) and [aiohttp](https://aiohttp.readthedocs.io/en/stable/), so bulk checks stay fast. A 24-query run against every supported platform completes in about 1.2 seconds.
 
@@ -45,7 +45,7 @@ Given an email address or username, it tells you whether it is **available**, **
 
 ### pip
 ```
-> pip install socialscan-ng
+> pip install scato
 ```
 
 ### Install from source
@@ -57,10 +57,10 @@ Given an email address or username, it tells you whether it is **available**, **
 
 ## Usage
 
-The CLI is installed under both `socialscan` and `socialscan-ng`; they are the same program.
+The CLI is installed as `scato`.
 
 ```
-usage: socialscan [list of usernames/email addresses to check]
+usage: scato [list of usernames/email addresses to check]
 
 positional arguments:
   query                 one or more usernames/email addresses to query (email addresses
@@ -93,7 +93,7 @@ options:
 Example:
 
 ```
-> socialscan social jsndiwimw --show-urls
+> scato social jsndiwimw --show-urls
 
 ----------------------------------------
                jsndiwimw
@@ -117,13 +117,13 @@ Available, Taken/Reserved, Invalid, Error
 
 ## As a library
 
-socialscan-ng can be imported into existing code and used as a library.
+scato can be imported into existing code and used as a library.
 
 The async method `execute_queries` and its synchronous wrapper `sync_execute_queries` take a list of queries and an optional list of platforms and proxies, execute all queries concurrently, and return the results in the same order.
 
 ```python
-from socialscan.platforms import Platforms
-from socialscan.util import sync_execute_queries
+from scato.platforms import Platforms
+from scato.util import sync_execute_queries
 
 queries = ["jsndiwimw", "social", "admin@mozilla.com"]
 platforms = [Platforms.GITHUB, Platforms.LASTFM, Platforms.FIREFOX]
@@ -171,9 +171,9 @@ Most tools check username availability by requesting the profile page of the use
 - **Reserved keywords**: platforms reserve a set of names that cannot be registered even though no profile page exists for them (try checking `admin`, `home` or `root` against other services).
 - **Deleted/banned accounts**: these usernames stay unavailable even when the profile page is gone.
 
-socialscan-ng avoids this by querying registration endpoints directly, which is what makes its answers reliable.
+scato avoids this by querying registration endpoints directly, which is what makes its answers reliable.
 
-**Two platforms are exceptions.** GitHub's sign-up form is behind a bot-protection challenge, and `tumblr.com` refuses connections from non-browser clients, so neither registration endpoint is reachable any more. For these two, socialscan-ng validates the username format locally and then checks the account page. Reserved keywords are still reported correctly on both, since each serves or redirects those paths rather than returning a 404 (of 26 reserved GitHub words tested, 24 report correctly). A username freed by a deleted account, however, will read as available.
+**Two platforms are exceptions.** GitHub's sign-up form is behind a bot-protection challenge, and `tumblr.com` refuses connections from non-browser clients, so neither registration endpoint is reachable any more. For these two, scato validates the username format locally and then checks the account page. Reserved keywords are still reported correctly on both, since each serves or redirects those paths rather than returning a 404 (of 26 reserved GitHub words tested, 24 report correctly). A username freed by a deleted account, however, will read as available.
 
 ### Rate limiting
 

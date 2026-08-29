@@ -7,7 +7,7 @@ import re
 
 import aiohttp
 
-from socialscan.platforms import (
+from scato.platforms import (
     EmailQueryable,
     PlatformResponse,
     Platforms,

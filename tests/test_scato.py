@@ -3,8 +3,8 @@ import logging
 
 import pytest
 
-from socialscan.platforms import BasePlatform, PlatformResponse, Platforms, PrerequestRequired
-from socialscan.util import sync_execute_queries
+from scato.platforms import BasePlatform, PlatformResponse, Platforms, PrerequestRequired
+from scato.util import sync_execute_queries
 
 TIMEOUT_DURATION = 30  # in seconds
 
@@ -18,7 +18,7 @@ UNUSED_EMAILS = ["unused@notanemail.com"]
 USED_EMAILS = {None: ["fire@gmail.com"], Platforms.FIREFOX: ["admin@mozilla.com"]}
 
 # A platform answering with one of these is refusing to serve us rather than answering the
-# query, which says nothing about whether socialscan reads its responses correctly
+# query, which says nothing about whether scato reads its responses correctly
 BLOCKED_MESSAGES = (
     BasePlatform.TOO_MANY_REQUEST_ERROR_MESSAGE,
     BasePlatform.TOKEN_ERROR_MESSAGE,
