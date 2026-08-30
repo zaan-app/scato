@@ -33,7 +33,7 @@ Given an email address or username, it tells you whether it is **available**, **
 |           | Username | Email | Method |
 |:---------:|:--------:|:-----:|:-------|
 | Instagram |    ✔️     |  ✔️   | Registration endpoint |
-| Twitter   |    ✔️     |  ✔️   | Registration endpoint |
+| X         |    ✔️     |  ✔️   | Registration endpoint |
 | Lastfm    |    ✔️     |       | Registration endpoint |
 | GitLab    |    ✔️     |       | Registration endpoint |
 | Reddit    |    ✔️     |       | Registration endpoint |
@@ -102,7 +102,7 @@ GitHub
 GitLab
 Lastfm
 Tumblr
-Twitter
+X
 ----------------------------------------
                  social
 ----------------------------------------
@@ -110,7 +110,7 @@ GitHub - https://github.com/social
 GitLab - https://gitlab.com/social
 Lastfm - https://www.last.fm/user/social
 Tumblr - https://social.tumblr.com
-Twitter - https://twitter.com/social
+X - https://x.com/social
 
 Available, Taken/Reserved, Invalid, Error
 ```

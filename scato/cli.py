@@ -32,6 +32,9 @@ COLOUR_UNAVAILABLE = Colour(Fore.YELLOW, Fore.WHITE)
 COLOUR_INVALID = Colour(Fore.CYAN, Fore.WHITE)
 COLOUR_ERROR = Colour(Fore.RED, Fore.RED)
 
+# Former platform names still accepted on the command line
+PLATFORM_ALIASES = {"TWITTER": "X"}
+
 
 def init_parser():
     parser = argparse.ArgumentParser(
@@ -176,8 +179,9 @@ async def main():
     if args.platforms:
         platforms = []
         for p in args.platforms:
-            if p.upper() in Platforms.__members__:
-                platforms.append(Platforms[p.upper()])
+            name = PLATFORM_ALIASES.get(p.upper(), p.upper())
+            if name in Platforms.__members__:
+                platforms.append(Platforms[name])
             else:
                 raise ValueError(p + " is not a valid platform")
     else:

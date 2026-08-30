@@ -434,16 +434,16 @@ class Reddit(BasePlatform, UsernameQueryable):
     # Email: You can register multiple Reddit accounts under the same email address so not possible to check if an address is in use
 
 
-class Twitter(BasePlatform, UsernameQueryable, EmailQueryable):
-    URL = "https://twitter.com/signup"
-    USERNAME_ENDPOINT = "https://api.twitter.com/i/users/username_available.json"
-    EMAIL_ENDPOINT = "https://api.twitter.com/i/users/email_available.json"
+class X(BasePlatform, UsernameQueryable, EmailQueryable):
+    URL = "https://x.com/signup"
+    USERNAME_ENDPOINT = "https://api.x.com/i/users/username_available.json"
+    EMAIL_ENDPOINT = "https://api.x.com/i/users/email_available.json"
     # [account in use, account suspended]
     USERNAME_TAKEN_MSGS = ["That username has been taken", "unavailable"]
-    USERNAME_LINK_FORMAT = "https://twitter.com/{}"
+    USERNAME_LINK_FORMAT = "https://x.com/{}"
 
     async def check_username(self, username):
-        async with self.get(Twitter.USERNAME_ENDPOINT, params={"username": username}) as r:
+        async with self.get(X.USERNAME_ENDPOINT, params={"username": username}) as r:
             json_body = await self.get_json(r)
             message = json_body["desc"]
             if json_body["valid"]:
@@ -452,12 +452,12 @@ class Twitter(BasePlatform, UsernameQueryable, EmailQueryable):
                 return self.response_unavailable_or_invalid(
                     username,
                     message=message,
-                    unavailable_messages=Twitter.USERNAME_TAKEN_MSGS,
-                    link=Twitter.USERNAME_LINK_FORMAT.format(username),
+                    unavailable_messages=X.USERNAME_TAKEN_MSGS,
+                    link=X.USERNAME_LINK_FORMAT.format(username),
                 )
 
     async def check_email(self, email):
-        async with self.get(Twitter.EMAIL_ENDPOINT, params={"email": email}) as r:
+        async with self.get(X.EMAIL_ENDPOINT, params={"email": email}) as r:
             json_body = await self.get_json(r)
             message = json_body["msg"]
             if not json_body["valid"] and not json_body["taken"]:
@@ -597,8 +597,8 @@ class Platforms(Enum):
     INSTAGRAM = Instagram
     LASTFM = Lastfm
     REDDIT = Reddit
-    TWITTER = Twitter
     TUMBLR = Tumblr
+    X = X
     FIREFOX = Firefox
 
     def __str__(self):
